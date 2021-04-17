@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {Form, Button, Row, Col} from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 import {searchAddress} from '../actions/search'
@@ -7,12 +7,16 @@ import {searchAddress} from '../actions/search'
 const SearchScreen = ({history}) => {
 	const [address, setAddress] = useState('')
 
+	const searchAddressReducer = useSelector((state) => state.searchAddress)
+	const {location} = searchAddressReducer
 	const dispatch = useDispatch()
 
 	const addressSubmit = (e) => {
 		e.preventDefault()
 		dispatch(searchAddress(address))
-		history.push('/forecast')
+		if (location !== '') {
+			history.push('/forecast')
+		}
 	}
 	return (
 		<FormContainer>
