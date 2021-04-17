@@ -14,10 +14,13 @@ const reducer = combineReducers({
 const locationFromStorgage = localStorage.getItem('location')
 	? JSON.parse(localStorage.getItem('location'))
 	: ''
-
+const favoritesFromStorage = localStorage.getItem('favorites')
+	? JSON.parse(localStorage.getItem('favorites'))
+	: ''
 const initialState = {
 	searchAddress: {
 		location: locationFromStorgage,
+		favorites: favoritesFromStorage,
 	},
 }
 const middleware = [thunk]

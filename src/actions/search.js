@@ -6,6 +6,7 @@ import {
 	SEARCH_FORECAST_REQUEST,
 	SEARCH_FORECAST_SUCCESS,
 	SEARCH_FORECAST_FAIL,
+	ADD_FAVORITE,
 } from '../constants/search'
 
 export const searchAddress = (address) => async (dispatch) => {
@@ -38,16 +39,14 @@ export const searchAddress = (address) => async (dispatch) => {
 			const {data} = await axios.get(
 				`https://api.weather.gov/points/${location.lat},${location.lng}`
 			)
-			
+
 			const forecastHourlySearch = data.properties.forecastHourly
 			const forecastHourlyData = await axios.get(forecastHourlySearch)
 			const hourlyPeriods = forecastHourlyData.data.properties.periods
-			
 
 			const forecastDailySearch = data.properties.forecast
 			const forecastDailyData = await axios.get(forecastDailySearch)
 			const dailyPeriods = forecastDailyData.data.properties.periods
-		
 
 			const forecastData = {
 				hourlyPeriods,
@@ -77,6 +76,9 @@ export const searchAddress = (address) => async (dispatch) => {
 		})
 	}
 }
-// export const searchForecast = () => async (dispatch, getState) => {
-
-// }
+export const addFavorite = (newFav) => (dispatch) => {
+	dispatch({
+		type: ADD_FAVORITE,
+		payload: newFav,
+	})
+}

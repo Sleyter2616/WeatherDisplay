@@ -1,4 +1,5 @@
 import {
+	ADD_FAVORITE,
 	SEARCH_ADDRESS_FAIL,
 	SEARCH_ADDRESS_REQUEST,
 	SEARCH_ADDRESS_SUCCESS,
@@ -7,7 +8,10 @@ import {
 	SEARCH_FORECAST_SUCCESS,
 } from '../constants/search'
 
-export const searchAddressReducer = (state = {location: {}}, action) => {
+export const searchAddressReducer = (
+	state = {location: {}, favorites: []},
+	action
+) => {
 	switch (action.type) {
 		case SEARCH_ADDRESS_REQUEST:
 			return {loading: true}
@@ -20,6 +24,11 @@ export const searchAddressReducer = (state = {location: {}}, action) => {
 			return {
 				loading: false,
 				error: action.payload,
+			}
+		case ADD_FAVORITE:
+			return {
+				...state,
+				favorites: action.payload,
 			}
 		default:
 			return state
