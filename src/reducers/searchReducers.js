@@ -1,23 +1,19 @@
 import {
-	SEARCH_ZIP_FAIL,
-	SEARCH_ZIP_REQUEST,
-	SEARCH_ZIP_SUCCESS,
+	SEARCH_ADDRESS_FAIL,
+	SEARCH_ADDRESS_REQUEST,
+	SEARCH_ADDRESS_SUCCESS,
 } from '../constants/search'
 
-export const searchReducer = (
-	state = {zipCode: 0, address: '', geoLoc: {}},
-	action
-) => {
+export const searchReducer = (state = {location: {}}, action) => {
 	switch (action.type) {
-		case SEARCH_ZIP_REQUEST:
-			return {loading: true, zipCode: action.payload}
-		case SEARCH_ZIP_SUCCESS:
+		case SEARCH_ADDRESS_REQUEST:
+			return {loading: true}
+		case SEARCH_ADDRESS_SUCCESS:
 			return {
-				...state,
 				loading: false,
-				geoLoc: action.payload,
+				location: action.payload,
 			}
-		case SEARCH_ZIP_FAIL:
+		case SEARCH_ADDRESS_FAIL:
 			return {
 				loading: false,
 				error: action.payload,

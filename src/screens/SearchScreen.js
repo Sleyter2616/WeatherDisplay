@@ -1,46 +1,34 @@
 import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {Form, Button, Row, Col} from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
+import {searchAddress} from '../actions/search'
 
-const SearchScreen = () => {
-	const [zipCode, setZipCode] = useState(0)
+const SearchScreen = ({history}) => {
 	const [address, setAddress] = useState('')
 
-	const zipCodeSubmit = () => {
-		console.log('zip')
-	}
-	const addressSubmit = () => {
-		console.log('add')
+	const dispatch = useDispatch()
+
+	const addressSubmit = (e) => {
+		e.preventDefault()
+		dispatch(searchAddress(address))
+		history.push('/forecast')
 	}
 	return (
 		<FormContainer>
 			<h1>Enter a Zip Code or Location</h1>
-			<Form onSubmit={zipCodeSubmit}>
+			<Form onSubmit={(e) => addressSubmit(e)}>
 				<Form.Group>
-					<Form.Label>Zip Code</Form.Label>
+					<Form.Label>Enter a Valid Address or Zip Code</Form.Label>
 					<Form.Control
 						type='text'
-						placeholder='Enter Zip Code'
-						value={zipCode}
-						onChange={(e) => setZipCode(e.target.value)}
-					></Form.Control>
-				</Form.Group>
-				<Button type='submit' variant='primary'>
-					Search by Zip Code
-				</Button>
-			</Form>
-			<Form onSubmit={addressSubmit}>
-				<Form.Group>
-					<Form.Label>Address</Form.Label>
-					<Form.Control
-						type='text'
-						placeholder='Enter Full Address'
+						placeholder='Enter a Valid Address or Zip Code'
 						value={address}
 						onChange={(e) => setAddress(e.target.value)}
 					></Form.Control>
 				</Form.Group>
 				<Button type='submit' variant='primary'>
-					Search by address
+					Search by Zip Code or Address
 				</Button>
 			</Form>
 		</FormContainer>
