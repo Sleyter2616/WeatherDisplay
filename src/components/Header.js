@@ -14,7 +14,12 @@ const Header = () => {
 					<Nav className='ml-auto'>
 						<LinkContainer to='/search'>
 							<Nav.Link>
-								<i className='fas fa-cloud-sun ' /> Search Tab
+								<i className='fas fa-search' /> Search Tab
+							</Nav.Link>
+						</LinkContainer>
+						<LinkContainer to='/forecast'>
+							<Nav.Link>
+								<i className='fas fa-cloud-sun' /> Forecast Tab
 							</Nav.Link>
 						</LinkContainer>
 					</Nav>

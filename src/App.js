@@ -4,7 +4,7 @@ import {Container} from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SearchScreen from './screens/SearchScreen'
-import ResultScreen from './screens/ResultScreen'
+import ForcastScreen from './screens/Forecast'
 import HomeScreen from './screens/HomeScreen'
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
 			<main className='py-3'>
 				<Container>
 					<Route path='/search' component={SearchScreen} />
-					<Route path='/results' component={ResultScreen} />
+					<Route path='/forecast' component={ForcastScreen} />
 					<Route path='/' exact component={HomeScreen} />
 				</Container>
 			</main>
