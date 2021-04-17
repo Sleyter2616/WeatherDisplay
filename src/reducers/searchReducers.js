@@ -26,14 +26,14 @@ export const searchAddressReducer = (state = {location: {}}, action) => {
 	}
 }
 
-export const searchForecastReducer = (state = {forcast: {}}, action) => {
+export const searchForecastReducer = (state = {}, action) => {
 	switch (action.type) {
 		case SEARCH_FORECAST_REQUEST:
 			return {loading: true}
 		case SEARCH_FORECAST_SUCCESS:
 			return {
 				loading: false,
-				forecast: action.payload,
+				forecastData: action.payload,
 			}
 		case SEARCH_FORECAST_FAIL:
 			return {

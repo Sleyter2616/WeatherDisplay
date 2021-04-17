@@ -38,14 +38,26 @@ export const searchAddress = (address) => async (dispatch) => {
 			const {data} = await axios.get(
 				`https://api.weather.gov/points/${location.lat},${location.lng}`
 			)
+			
+			const forecastHourlySearch = data.properties.forecastHourly
+			const forecastHourlyData = await axios.get(forecastHourlySearch)
+			const hourlyPeriods = forecastHourlyData.data.properties.periods
+			
 
-			console.log(data)
+			const forecastDailySearch = data.properties.forecast
+			const forecastDailyData = await axios.get(forecastDailySearch)
+			const dailyPeriods = forecastDailyData.data.properties.periods
+		
+
+			const forecastData = {
+				hourlyPeriods,
+				dailyPeriods,
+			}
 
 			dispatch({
 				type: SEARCH_FORECAST_SUCCESS,
-				payload: data,
+				payload: forecastData,
 			})
-			// localStorage.setItem('ata', JSON.stringify(location))
 		} catch (error) {
 			dispatch({
 				type: SEARCH_FORECAST_FAIL,

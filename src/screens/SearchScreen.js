@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Form, Button, Row, Col} from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
@@ -9,15 +9,21 @@ const SearchScreen = ({history}) => {
 
 	const searchAddressReducer = useSelector((state) => state.searchAddress)
 	const {location} = searchAddressReducer
+
+	const searchForecast = useSelector((state) => state.searchForecast)
+	const {forecastData} = searchForecast
+	// const {hourlyPeriods, dailyPeriods} = forecastData
 	const dispatch = useDispatch()
 
 	const addressSubmit = (e) => {
 		e.preventDefault()
 		dispatch(searchAddress(address))
-		if (location !== '') {
+	}
+	useEffect(() => {
+		if (forecastData) {
 			history.push('/forecast')
 		}
-	}
+	}, [history, forecastData])
 	return (
 		<FormContainer>
 			<h1>Enter a Zip Code or Location</h1>
