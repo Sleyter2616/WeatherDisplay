@@ -76,9 +76,14 @@ export const searchAddress = (address) => async (dispatch) => {
 		})
 	}
 }
-export const addFavorite = (newFav) => (dispatch) => {
+export const addFavorite = (newFav) => (dispatch, getState) => {
 	dispatch({
 		type: ADD_FAVORITE,
 		payload: newFav,
 	})
+
+	localStorage.setItem(
+		'favorites',
+		JSON.stringify(getState().addFavorite.favorites)
+	)
 }

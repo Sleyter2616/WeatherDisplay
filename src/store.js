@@ -4,11 +4,13 @@ import thunk from 'redux-thunk'
 import {
 	searchAddressReducer,
 	searchForecastReducer,
+	addFavoriteReducer,
 } from './reducers/searchReducers'
 
 const reducer = combineReducers({
 	searchAddress: searchAddressReducer,
 	searchForecast: searchForecastReducer,
+	addFavorite: addFavoriteReducer,
 })
 
 const locationFromStorgage = localStorage.getItem('location')
@@ -20,6 +22,8 @@ const favoritesFromStorage = localStorage.getItem('favorites')
 const initialState = {
 	searchAddress: {
 		location: locationFromStorgage,
+	},
+	addFavorite: {
 		favorites: favoritesFromStorage,
 	},
 }

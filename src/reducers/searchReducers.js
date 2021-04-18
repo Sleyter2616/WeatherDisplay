@@ -8,6 +8,17 @@ import {
 	SEARCH_FORECAST_SUCCESS,
 } from '../constants/search'
 
+export const addFavoriteReducer = (state = {favorites: []}, action) => {
+	switch (action.type) {
+		case ADD_FAVORITE:
+			return {
+				favorites: [...state.favorites, action.payload],
+			}
+		default:
+			return state
+	}
+}
+
 export const searchAddressReducer = (
 	state = {location: {}, favorites: []},
 	action
@@ -25,11 +36,7 @@ export const searchAddressReducer = (
 				loading: false,
 				error: action.payload,
 			}
-		case ADD_FAVORITE:
-			return {
-				...state,
-				favorites: action.payload,
-			}
+
 		default:
 			return state
 	}

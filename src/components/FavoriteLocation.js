@@ -15,13 +15,13 @@ const FavoriteLocation = () => {
 			name,
 		}
 		dispatch(addFavorite(fav))
-		let existingFavs = JSON.parse(localStorage.getItem('favorites') || '[]')
-		if (!existingFavs.includes(fav)) {
-			existingFavs.push(fav)
-			localStorage.setItem('favorites', JSON.stringify(existingFavs))
-		} else {
-			console.log('item already exists')
-		}
+		// let existingFavs = JSON.parse(localStorage.getItem('favorites') || '[]')
+		// if (!existingFavs.includes(fav)) {
+		// 	existingFavs.push(fav)
+		// 	localStorage.setItem('favorites', JSON.stringify(existingFavs))
+		// } else {
+		// 	console.log('item already exists')
+		// }
 	}
 
 	return (
