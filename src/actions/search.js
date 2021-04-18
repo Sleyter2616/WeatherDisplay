@@ -30,45 +30,47 @@ export const searchAddress = (address) => async (dispatch) => {
 			payload: location,
 		})
 		localStorage.setItem('location', JSON.stringify(location))
-
-		try {
-			dispatch({
-				type: SEARCH_FORECAST_REQUEST,
-			})
-
-			const {data} = await axios.get(
-				`https://api.weather.gov/points/${location.lat},${location.lng}`
-			)
-
-			const forecastHourlySearch = data.properties.forecastHourly
-			const forecastHourlyData = await axios.get(forecastHourlySearch)
-			const hourlyPeriods = forecastHourlyData.data.properties.periods
-
-			const forecastDailySearch = data.properties.forecast
-			const forecastDailyData = await axios.get(forecastDailySearch)
-			const dailyPeriods = forecastDailyData.data.properties.periods
-
-			const forecastData = {
-				hourlyPeriods,
-				dailyPeriods,
-			}
-
-			dispatch({
-				type: SEARCH_FORECAST_SUCCESS,
-				payload: forecastData,
-			})
-		} catch (error) {
-			dispatch({
-				type: SEARCH_FORECAST_FAIL,
-				payload:
-					error.response && error.response.data.message
-						? error.response.data.message
-						: error.message,
-			})
-		}
+		dispatch(getForecast(location))
 	} catch (error) {
 		dispatch({
 			type: SEARCH_ADDRESS_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		})
+	}
+}
+export const getForecast = (location) => async (dispatch) => {
+	try {
+		dispatch({
+			type: SEARCH_FORECAST_REQUEST,
+		})
+
+		const {data} = await axios.get(
+			`https://api.weather.gov/points/${location.lat},${location.lng}`
+		)
+
+		const forecastHourlySearch = data.properties.forecastHourly
+		const forecastHourlyData = await axios.get(forecastHourlySearch)
+		const hourlyPeriods = forecastHourlyData.data.properties.periods
+
+		const forecastDailySearch = data.properties.forecast
+		const forecastDailyData = await axios.get(forecastDailySearch)
+		const dailyPeriods = forecastDailyData.data.properties.periods
+
+		const forecastData = {
+			hourlyPeriods,
+			dailyPeriods,
+		}
+
+		dispatch({
+			type: SEARCH_FORECAST_SUCCESS,
+			payload: forecastData,
+		})
+	} catch (error) {
+		dispatch({
+			type: SEARCH_FORECAST_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

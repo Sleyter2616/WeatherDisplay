@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Tabs, Tab, Carousel, Image} from 'react-bootstrap'
+import {Tabs, Tab, Carousel, Image, ListGroup} from 'react-bootstrap'
 import FavoriteLocation from '../components/FavoriteLocation'
 import DisplayFav from '../components/DisplayFav'
 
@@ -10,13 +10,31 @@ const ForcastScreen = () => {
 	const [temp, setTemp] = useState(0)
 
 	const searchForecast = useSelector((state) => state.searchForecast)
-
 	const {forecastData} = searchForecast
-	const {hourlyPeriods, dailyPeriods} = forecastData
+	let {hourlyPeriods, dailyPeriods} = forecastData
+
+	const addFavorite = useSelector((state) => state.addFavorite)
+	const {favorites} = addFavorite
+
+	useEffect(() => {
+		hourlyPeriods = forecastData.hourlyPeriods
+		dailyPeriods = forecastData.dailyPeriods
+	}, [forecastData])
 
 	return (
 		<>
-			<DisplayFav />
+			<h2>Favorites</h2>
+			<ListGroup>
+				{favorites
+					? favorites.map((favorite) => (
+							<DisplayFav
+								key={favorite.name}
+								name={favorite.name}
+								location={favorite.location}
+							/>
+					  ))
+					: null}
+			</ListGroup>
 			<Tabs defaultActiveKey='today' id='uncontrolled-tab-example'>
 				{hourlyPeriods ? (
 					<Tab eventKey='today' title='24 Hour Forecast'>
@@ -36,11 +54,11 @@ const ForcastScreen = () => {
 											{hour.startTime.substring(11, 16)}
 										</h3>
 										<h5></h5>
-										<h6>
+										<p>
 											{hour.shortForecast}. It will be{' '}
 											{hour.temperature}{' '}
 											{hour.temperatureUnit}{' '}
-										</h6>
+										</p>
 									</Carousel.Caption>
 								</Carousel.Item>
 							))}
