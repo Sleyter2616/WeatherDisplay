@@ -12,7 +12,7 @@ const SearchScreen = ({history}) => {
 
 	const searchForecast = useSelector((state) => state.searchForecast)
 	const {forecastData} = searchForecast
-	// const {hourlyPeriods, dailyPeriods} = forecastData
+
 	const dispatch = useDispatch()
 
 	const addressSubmit = (e) => {
@@ -20,7 +20,10 @@ const SearchScreen = ({history}) => {
 		dispatch(searchAddress(address))
 	}
 	useEffect(() => {
-		if (forecastData) {
+		if (
+			forecastData.hourlyPeriods.length !== 0 &&
+			forecastData.dailyPeriods.length !== 0
+		) {
 			history.push('/forecast')
 		}
 	}, [history, forecastData])

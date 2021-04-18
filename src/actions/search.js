@@ -42,9 +42,11 @@ export const searchAddress = (address) => async (dispatch) => {
 	}
 }
 export const getForecast = (location) => async (dispatch) => {
+	console.log('in GET FORECAST:', location)
 	try {
 		dispatch({
 			type: SEARCH_FORECAST_REQUEST,
+			loading: true,
 		})
 
 		const {data} = await axios.get(
@@ -63,7 +65,7 @@ export const getForecast = (location) => async (dispatch) => {
 			hourlyPeriods,
 			dailyPeriods,
 		}
-
+		console.log('forecast:', forecastData)
 		dispatch({
 			type: SEARCH_FORECAST_SUCCESS,
 			payload: forecastData,

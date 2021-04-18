@@ -45,7 +45,10 @@ export const searchAddressReducer = (
 export const searchForecastReducer = (state = {}, action) => {
 	switch (action.type) {
 		case SEARCH_FORECAST_REQUEST:
-			return {loading: true}
+			return {
+				...state,
+				loading: true,
+			}
 		case SEARCH_FORECAST_SUCCESS:
 			return {
 				loading: false,

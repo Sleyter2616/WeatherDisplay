@@ -10,16 +10,11 @@ const ForcastScreen = () => {
 	const [temp, setTemp] = useState(0)
 
 	const searchForecast = useSelector((state) => state.searchForecast)
-	const {forecastData} = searchForecast
-	let {hourlyPeriods, dailyPeriods} = forecastData
+	const {forecastData, loading} = searchForecast
+	const {hourlyPeriods, dailyPeriods} = forecastData
 
 	const addFavorite = useSelector((state) => state.addFavorite)
 	const {favorites} = addFavorite
-
-	useEffect(() => {
-		hourlyPeriods = forecastData.hourlyPeriods
-		dailyPeriods = forecastData.dailyPeriods
-	}, [forecastData])
 
 	return (
 		<>

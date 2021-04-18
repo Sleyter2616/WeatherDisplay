@@ -21,10 +21,18 @@ const favoritesFromStorage = localStorage.getItem('favorites')
 	: ''
 const initialState = {
 	searchAddress: {
+		loading: false,
 		location: locationFromStorgage,
 	},
 	addFavorite: {
 		favorites: favoritesFromStorage,
+	},
+	searchForecast: {
+		loading: false,
+		forecastData: {
+			hourlyPeriods: [],
+			dailyPeriods: [],
+		},
 	},
 }
 const middleware = [thunk]
