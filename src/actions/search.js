@@ -1,4 +1,5 @@
 import axios from 'axios'
+import dotenv from 'dotenv'
 import {
 	SEARCH_ADDRESS_REQUEST,
 	SEARCH_ADDRESS_FAIL,
@@ -9,6 +10,7 @@ import {
 	ADD_FAVORITE,
 } from '../constants/search'
 
+dotenv.config()
 export const searchAddress = (address) => async (dispatch) => {
 	try {
 		dispatch({
@@ -19,7 +21,7 @@ export const searchAddress = (address) => async (dispatch) => {
 			{
 				params: {
 					address: address,
-					key: 'AIzaSyAAC2ctVro_8XoLzZrAUt6eWZnWrv6Pjas',
+					key: process.env.REACT_APP_API_KEY,
 				},
 			}
 		)
