@@ -5,7 +5,6 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SearchScreen from './screens/SearchScreen'
 import ForcastScreen from './screens/ForecastScreen'
-import HomeScreen from './screens/HomeScreen'
 
 const App = () => {
 	return (
@@ -15,7 +14,7 @@ const App = () => {
 				<Container>
 					<Route path='/search' component={SearchScreen} />
 					<Route path='/forecast' component={ForcastScreen} />
-					<Route path='/' exact component={HomeScreen} />
+					<Route path='/' exact component={SearchScreen} />
 				</Container>
 			</main>
 			<Footer />

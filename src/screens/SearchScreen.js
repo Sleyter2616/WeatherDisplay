@@ -3,12 +3,13 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Form, Button, Row, Col} from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 import {searchAddress} from '../actions/search'
+import Message from '../components/Message'
 
 const SearchScreen = ({history}) => {
 	const [address, setAddress] = useState('')
 
 	const searchAddressReducer = useSelector((state) => state.searchAddress)
-	const {location} = searchAddressReducer
+	const {location, error, loading} = searchAddressReducer
 
 	const searchForecast = useSelector((state) => state.searchForecast)
 	const {forecastData} = searchForecast
@@ -30,6 +31,7 @@ const SearchScreen = ({history}) => {
 	return (
 		<FormContainer>
 			<h1>Enter a Zip Code or Location</h1>
+			{error && <Message> {error} </Message>}
 			<Form onSubmit={(e) => addressSubmit(e)}>
 				<Form.Group>
 					<Form.Label>Enter a Valid Address or Zip Code</Form.Label>

@@ -29,11 +29,6 @@ const Header = () => {
 								<i className='fas fa-search' /> Search Tab
 							</Nav.Link>
 						</LinkContainer>
-						<LinkContainer to='/forecast'>
-							<Nav.Link>
-								<i className='fas fa-cloud-sun' /> Forecast Tab
-							</Nav.Link>
-						</LinkContainer>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
