@@ -15,20 +15,13 @@ const FavoriteLocation = () => {
 			name,
 		}
 		dispatch(addFavorite(fav))
-		// let existingFavs = JSON.parse(localStorage.getItem('favorites') || '[]')
-		// if (!existingFavs.includes(fav)) {
-		// 	existingFavs.push(fav)
-		// 	localStorage.setItem('favorites', JSON.stringify(existingFavs))
-		// } else {
-		// 	console.log('item already exists')
-		// }
 	}
 
 	return (
 		<div>
 			<Form onSubmit={favoriteHandler}>
 				<Form.Group controlId='favoritename'>
-					<Form.Label>Name</Form.Label>
+					<Form.Label>Add to favorites</Form.Label>
 					<Form.Control
 						value={name}
 						type='text'

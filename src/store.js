@@ -32,6 +32,8 @@ const initialState = {
 		forecastData: {
 			hourlyPeriods: [],
 			dailyPeriods: [],
+			minTempDaily: -Infinity,
+			maxTempDaily: Infinity,
 		},
 	},
 }

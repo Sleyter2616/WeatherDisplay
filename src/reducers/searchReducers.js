@@ -5,6 +5,7 @@ import {
 	SEARCH_ADDRESS_SUCCESS,
 	SEARCH_FORECAST_FAIL,
 	SEARCH_FORECAST_REQUEST,
+	SEARCH_FORECAST_RESET,
 	SEARCH_FORECAST_SUCCESS,
 } from '../constants/search'
 
@@ -19,10 +20,7 @@ export const addFavoriteReducer = (state = {favorites: []}, action) => {
 	}
 }
 
-export const searchAddressReducer = (
-	state = {location: {}, favorites: []},
-	action
-) => {
+export const searchAddressReducer = (state = {location: {}}, action) => {
 	switch (action.type) {
 		case SEARCH_ADDRESS_REQUEST:
 			return {loading: true}
@@ -58,6 +56,15 @@ export const searchForecastReducer = (state = {}, action) => {
 			return {
 				loading: false,
 				error: action.payload,
+			}
+		case SEARCH_FORECAST_RESET:
+			return {
+				forecastData: {
+					hourlyPeriods: [],
+					dailyPeriods: [],
+					minTempDaily: -Infinity,
+					maxTempDaily: Infinity,
+				},
 			}
 		default:
 			return state

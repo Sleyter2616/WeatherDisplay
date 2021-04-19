@@ -24,7 +24,7 @@ export const searchAddress = (address) => async (dispatch) => {
 			}
 		)
 		const location = data.results[0].geometry.location
-		console.log(location)
+
 		dispatch({
 			type: SEARCH_ADDRESS_SUCCESS,
 			payload: location,
@@ -42,7 +42,6 @@ export const searchAddress = (address) => async (dispatch) => {
 	}
 }
 export const getForecast = (location) => async (dispatch) => {
-	console.log('in GET FORECAST:', location)
 	try {
 		dispatch({
 			type: SEARCH_FORECAST_REQUEST,
@@ -61,11 +60,23 @@ export const getForecast = (location) => async (dispatch) => {
 		const forecastDailyData = await axios.get(forecastDailySearch)
 		const dailyPeriods = forecastDailyData.data.properties.periods
 
+		const maxTempDaily = hourlyPeriods.slice(0, 24).reduce((acc, cv) => {
+			acc = cv.temperature > acc ? cv.temperature : acc
+			return acc
+		}, -Infinity)
+
+		const minTempDaily = hourlyPeriods.slice(0, 24).reduce((acc, cv) => {
+			acc = cv.temperature < acc ? cv.temperature : acc
+			return acc
+		}, Infinity)
+
 		const forecastData = {
 			hourlyPeriods,
 			dailyPeriods,
+			minTempDaily,
+			maxTempDaily,
 		}
-		console.log('forecast:', forecastData)
+
 		dispatch({
 			type: SEARCH_FORECAST_SUCCESS,
 			payload: forecastData,

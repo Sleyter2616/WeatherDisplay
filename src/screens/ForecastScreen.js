@@ -11,7 +11,12 @@ const ForcastScreen = () => {
 
 	const searchForecast = useSelector((state) => state.searchForecast)
 	const {forecastData, loading} = searchForecast
-	const {hourlyPeriods, dailyPeriods} = forecastData
+	const {
+		hourlyPeriods,
+		dailyPeriods,
+		minTempDaily,
+		maxTempDaily,
+	} = forecastData
 
 	const addFavorite = useSelector((state) => state.addFavorite)
 	const {favorites} = addFavorite
@@ -33,6 +38,11 @@ const ForcastScreen = () => {
 			<Tabs defaultActiveKey='today' id='uncontrolled-tab-example'>
 				{hourlyPeriods ? (
 					<Tab eventKey='today' title='24 Hour Forecast'>
+						<h2>
+							High temperature for the day : {maxTempDaily}F
+							<br />
+							Low temperature for the day : {minTempDaily}F
+						</h2>
 						<Carousel pause='hover' className='bg-dark'>
 							{hourlyPeriods.slice(0, 24).map((hour) => (
 								<Carousel.Item key={hour.startTime}>
@@ -43,16 +53,16 @@ const ForcastScreen = () => {
 									/>
 									<Carousel.Caption>
 										<h3>
-											DAY:{' '}
-											{hour.startTime.substring(0, 10)}{' '}
-											TIME:{' '}
+											DAY:
+											{hour.startTime.substring(0, 10)}
+											TIME:
 											{hour.startTime.substring(11, 16)}
 										</h3>
 										<h5></h5>
 										<p>
-											{hour.shortForecast}. It will be{' '}
-											{hour.temperature}{' '}
-											{hour.temperatureUnit}{' '}
+											{hour.shortForecast}. It will be
+											{hour.temperature}
+											{hour.temperatureUnit}
 										</p>
 									</Carousel.Caption>
 								</Carousel.Item>
@@ -75,7 +85,11 @@ const ForcastScreen = () => {
 									/>
 									<Carousel.Caption>
 										<h3>{day.name}</h3>
-										<p>{day.detailedForecast}</p>
+										<p>{day.shortForecast}</p>
+										<p>
+											{day.temperature}
+											{day.temperatureUnit}
+										</p>
 									</Carousel.Caption>
 								</Carousel.Item>
 							))}

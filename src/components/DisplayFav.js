@@ -7,7 +7,6 @@ const DisplayFav = ({name, location}) => {
 	const dispatch = useDispatch()
 
 	const checkForecast = (e) => {
-		console.log(location)
 		e.preventDefault()
 		dispatch(getForecast(location))
 	}
